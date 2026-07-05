@@ -12,12 +12,12 @@ export async function selectStyleTemplates() {
         description: 'Basic styling using .css files',
       },
       {
-        name: 'SCSS / SASS (comming soon)',
+        name: 'SCSS / SASS',
         value: 'scss',
         description: 'Use SCSS syntax for stylesheets',
       },
       {
-        name: 'Tailwind CSS (comming soon)',
+        name: 'Tailwind CSS',
         value: 'tailwindcss',
         description: 'Utility-first styling with Tailwind',
       },

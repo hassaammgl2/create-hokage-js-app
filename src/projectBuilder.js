@@ -24,29 +24,53 @@ export class ProjectBuilder {
         this.#tellAboutEnvs()
     }
 
+    #getStyleDir() {
+        switch (this.projectStyle) {
+            case 'scss':
+                return 'scss';
+            case 'tailwindcss':
+                return 'tailwindcss';
+            default:
+                return 'normalcss';
+        }
+    }
+
+    #getExtraPackages() {
+        switch (this.projectStyle) {
+            case 'scss':
+                return ' && npm install sass';
+            case 'tailwindcss':
+                return ' && npm install -D tailwindcss postcss autoprefixer';
+            default:
+                return '';
+        }
+    }
+
     #setCssPathsAndPackages(projectType) {
+        const styleDir = this.#getStyleDir();
+
         switch (projectType) {
             case '1':
-                this.templatePath = 'hassaammgl/create-hokage-js-app/templates/normalcss/js-template#main';
-                this.clientPackages = `npm i react react-dom zod axios react-router && npm i -D @eslint/js @types/react @types/react-dom @vitejs/plugin-react-swc eslint eslint-plugin-react-hooks eslint-plugin-react-refresh globals vite`;
+                this.templatePath = `hassaammgl/create-hokage-js-app/templates/${styleDir}/js-template#main`;
+                this.clientPackages = `npm i react react-dom zod axios react-router && npm i -D @eslint/js @types/react @types/react-dom @vitejs/plugin-react-swc eslint eslint-plugin-react-hooks eslint-plugin-react-refresh globals vite${this.#getExtraPackages()}`;
                 this.apiPackages = `npm install argon2 colors cookie-parser cors dotenv express express-async-handler joi jsonwebtoken mongoose morgan`;
                 break;
 
             case '2':
-                this.templatePath = 'hassaammgl/create-hokage-js-app/templates/normalcss/ts-template#main';
-                this.clientPackages = `npm install react react-dom zod axios react-router && npm install --save-dev @eslint/js @types/react @types/react-dom @vitejs/plugin-react eslint eslint-plugin-react-hooks eslint-plugin-react-refresh globals typescript typescript-eslint vite`;
+                this.templatePath = `hassaammgl/create-hokage-js-app/templates/${styleDir}/ts-template#main`;
+                this.clientPackages = `npm install react react-dom zod axios react-router && npm install --save-dev @eslint/js @types/react @types/react-dom @vitejs/plugin-react eslint eslint-plugin-react-hooks eslint-plugin-react-refresh globals typescript typescript-eslint vite${this.#getExtraPackages()}`;
                 this.apiPackages = `npm install argon2 colors cookie-parser cors dotenv express express-async-handler joi jsonwebtoken mongoose morgan && npm install --save-dev @types/argon2 @types/cookie-parser @types/cors @types/express @types/jsonwebtoken @types/morgan @types/node ts-node-dev tsx typescript`;
                 break;
 
             case '3':
-                this.templatePath = 'hassaammgl/create-hokage-js-app/templates/normalcss/js-frontend-ts-backend#main';
-                this.clientPackages = `npm i react react-dom zod axios react-router && npm i -D @eslint/js @types/react @types/react-dom @vitejs/plugin-react-swc eslint eslint-plugin-react-hooks eslint-plugin-react-refresh globals vite`;
+                this.templatePath = `hassaammgl/create-hokage-js-app/templates/${styleDir}/js-frontend-ts-backend#main`;
+                this.clientPackages = `npm i react react-dom zod axios react-router && npm i -D @eslint/js @types/react @types/react-dom @vitejs/plugin-react-swc eslint eslint-plugin-react-hooks eslint-plugin-react-refresh globals vite${this.#getExtraPackages()}`;
                 this.apiPackages = `npm install argon2 colors cookie-parser cors dotenv express express-async-handler joi jsonwebtoken mongoose morgan && npm install --save-dev @types/argon2 @types/cookie-parser @types/cors @types/express @types/jsonwebtoken @types/morgan @types/node ts-node-dev tsx typescript`;
                 break;
 
             case '4':
-                this.templatePath = 'hassaammgl/create-hokage-js-app/templates/normalcss/ts-frontend-js-backend#main';
-                this.clientPackages = `npm install react react-dom zod axios react-router && npm install --save-dev @eslint/js @types/react @types/react-dom @vitejs/plugin-react eslint eslint-plugin-react-hooks eslint-plugin-react-refresh globals typescript typescript-eslint vite`;
+                this.templatePath = `hassaammgl/create-hokage-js-app/templates/${styleDir}/ts-frontend-js-backend#main`;
+                this.clientPackages = `npm install react react-dom zod axios react-router && npm install --save-dev @eslint/js @types/react @types/react-dom @vitejs/plugin-react eslint eslint-plugin-react-hooks eslint-plugin-react-refresh globals typescript typescript-eslint vite${this.#getExtraPackages()}`;
                 this.apiPackages = `npm install argon2 colors cookie-parser cors dotenv express express-async-handler joi jsonwebtoken mongoose morgan`;
                 break;
 
